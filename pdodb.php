@@ -5,16 +5,16 @@ require_once 'logsql.php';
 /**
  * Based on PDO with custom functions to easily work with database.
  *
- * Instruction==
+ *** Instruction
  * 1. Create class Model extends pdodb.php
  * 2. Write a function with parameters (options)
  * 3. $sql = "...where xxx = ?";
  * 4. $this->setQuery($sql);
- * 5. return $this->execute() [for insert, update, delete] or $this->all() or $this->single(array(xxx));
- * Note: Example of Transaction on end of file
+ * 5. return $this->execute() [insert, update, delete]
+ * 		or $this->all() [select *] or $this->single( array(params/options) );
  */
 
-class pdodb{
+class pdodb {
 	protected $pdo = null;
 	protected $sql = '';
 	protected $sta = null;
@@ -241,28 +241,28 @@ class pdodb{
 	}
 }
 
-//==Example of Transaction==
-// $pdo = new pdodb();
-// $pdo->beginTransaction();
-// try
-// {
-// 	$sql = "insert into user values(?,?,?,?)";
-// 	$pdo->setQuery($sql);
-// 	$pdo->execute(array(null,1,1,2));
-// 	$sql2 = "insert into user values(?,?,?,?)";
-// 	$pdo->setQuery($sql);
-// 	$pdo->execute(array(null,1,1,'aa')); //fail
-// 	$pdo->commit();
-// }
-// catch (PDOException $ex)
-// {
-// 	$pdo->rollBack();
-// }
+/*==Example of Transaction==
+$pdo = new pdodb();
+$pdo->beginTransaction();
+try
+{
+	$sql = "insert into user values(?,?,?,?)";
+	$pdo->setQuery($sql);
+	$pdo->execute(array(null,1,1,2));
+	$sql2 = "insert into user values(?,?,?,?)";
+	$pdo->setQuery($sql);
+	$pdo->execute(array(null,1,1,'aa')); //fail
+	$pdo->commit();
+}
+catch (PDOException $ex)
+{
+	$pdo->rollBack();
+}*/
 
 
-// $pdo = new pdodb();
-// $sql = "select * from user where id = ?";
-// $pdo->setQuery($sql);
-// echo '<pre>';
-// print_r($pdo->single(array(1)));
+/*$pdo = new pdodb();
+$sql = "select * from user where id = ?";
+$pdo->setQuery($sql);
+echo '<pre>';
+print_r($pdo->single(array(1)));*/
 ?>
