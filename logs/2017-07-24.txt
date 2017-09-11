@@ -1,0 +1,31 @@
+Time: 17:33:35
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '))' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, 'aaa', 2, 2, time())
+-----
+Time: 17:30:48
+SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: 'Y-m-d H:i:s'
+Raw SQL : INSERT INTO `products` VALUES (null, 'aaa', 2, 2, date('Y-m-d H:i:s'))
+-----
+Time: 17:29:56
+SQLSTATE[42000]: Syntax error or access violation: 1305 FUNCTION php-mvc-pure-db.getdate does not exist
+Raw SQL : INSERT INTO `products` VALUES (null, 'aaa', 2, 2, getdate())
+-----
+Time: 17:29:00
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e' in 'field list'
+Raw SQL : INSERT INTO `products` VALUES (null, 'aaa', e, e, null)
+-----
+Time: 17:24:08
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'aaa' in 'field list'
+Raw SQL : INSERT INTO `products` VALUES (null, aaa, 1, 1, null)
+-----
+Time: 17:23:41
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'aaa' in 'field list'
+Raw SQL : INSERT INTO `products` VALUES (null, aaa, 1, 1, null)
+-----
+Time: 17:23:29
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' 1, 1, null)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, , 1, 1, null)
+-----
+Time: 17:22:11
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' 1, 1)' at line 1
+Raw SQL : INSERT INTO `products`(`name`, `quantity`, `price`) VALUES (, 1, 1)

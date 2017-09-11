@@ -1,0 +1,39 @@
+Time: 10:43:13
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:42:42
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:41:15
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '11501558875677-cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1,' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '11501558875677-cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:40:28
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '11501558828382-cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1,' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '11501558828382-cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:40:17
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '11501558817360-cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1,' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '11501558817360-cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:39:37
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '11501558777909cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, ' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '11501558777909cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:38:07
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '10.79849500 1501558687cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMEST' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '10.79849500 1501558687cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:35:56
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '1cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '1cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:35:28
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , '1cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , '1cap-lai-pass-2.sql', '', 0, '19700101', CURRENT_TIMESTAMP, 1, null, null)
+-----
+Time: 10:28:24
+SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect datetime value: '1' for column 'created_by' at row 1
+Raw SQL : INSERT INTO `products` VALUES (null, 'aaa', 100, 100, 'cap-lai-pass-2.sql', '<p>abc</p>', 1, '20170108', CURRENT_TIMESTAMP, 1, null, null)

@@ -4,16 +4,7 @@ require_once 'logsql.php';
 
 /**
  * Based on PDO with custom functions to easily work with database.
- *
- *** Instruction
- * 1. Create class Model extends pdodb.php
- * 2. Write a function with parameters (options)
- * 3. $sql = "...where xxx = ?";
- * 4. $this->setQuery($sql);
- * 5. return $this->execute() [insert, update, delete]
- * 		or $this->all() [select *] or $this->single( array(params/options) );
  */
-
 class pdodb {
 	protected $pdo = null;
 	protected $sql = '';
@@ -28,7 +19,7 @@ class pdodb {
 	public function connect() {
 		try
 		{
-			// get the connection string with format 'mysql:host=...;dbname=...; & set utf8'
+			# Get the connection string with format 'mysql:host=...;dbname=...;'
 			$this->pdo = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PWD);
 			$this->pdo->query("SET NAMES 'utf8'");
 
@@ -40,7 +31,7 @@ class pdodb {
 		}
 		catch (PDOException $ex)
 		{
-			//Write into log
+			# Write into log
 			echo $this->ExceptionLog($ex->getMessage());
 			die();
 		}
@@ -51,105 +42,91 @@ class pdodb {
 		$this->sta = null;
 	}
 
-	public function setQuery($sql) {
+	private function setQuery($sql) {
 		$sql = trim(str_replace("\r", " ", $sql));
 		$this->sql = $sql;
 	}
 
 	/**
-	 * Function for insert, update, delete
+	 * Function exec SQL for insert, update, delete
+	 *
+	 * @param string $sql
+	 * @return number of rows affect (>0)
 	 */
-	public function execute($opt = array()) {
+	public function execute($sql) {
+		$this->setQuery($sql);
 		try
 		{
 			$this->sta = $this->pdo->prepare($this->sql);
-			if($opt) {
-				for($i=0; $i < count($opt); $i++) {
-					$this->sta->bindParam($i+1, $opt[$i]);
-				}
-			}
 			$this->sta->execute();
-			return $this->sta->rowCount(); // >0 -> success or number of rows affect
+			return $this->sta->rowCount();
 		}
 		catch (PDOException $ex)
 		{
-			echo $this->ExceptionLog($ex->getMessage(), $this->sql, implode(",",array_values($opt)));
+			echo $this->ExceptionLog($ex->getMessage(), $this->sql);
 			die();
 		}
 	}
 
 	/**
-	 * Function for load with method fetch
-	 * Because method execute return an int -> fetch dont work
+	 * Function for load results with method fetch
+	 * @why b/c func "execute" return an int that method fetch wont work
 	 */
-	private function execLoad($opt = array()) {
+	private function execLoad() {
 		try
 		{
 			$this->sta = $this->pdo->prepare($this->sql);
-			if($opt) {
-				for($i=0; $i < count($opt); $i++) {
-					$this->sta->bindParam($i+1, $opt[$i]);
-				}
-			}
 			$this->sta->execute();
 			return $this->sta;
 		}
 		catch (PDOException $ex)
 		{
-			echo $this->ExceptionLog($ex->getMessage(), $this->sql, implode(",",array_values($opt)));
+			echo $this->ExceptionLog($ex->getMessage(), $this->sql);
 			die();
 		}
 	}
 
+	# closeCursor(); Frees up the connection to the server
+
 	/**
 	 * Function load all rows of table based on sql
+	 *
+	 * @return Array Object
 	 */
-	public function all($opt = array()) {
-		if(!$opt) {
-			if(!$result = $this->execLoad())
-				return false;
-		}
-		else {
-			if(!$result = $this->execLoad($opt))
-				return false;
-		}
-		$data = $result->fetchAll(PDO::FETCH_OBJ); //object
-		$result->closeCursor(); // Frees up the connection to the server
+	public function all($sql) {
+		$this->setQuery($sql);
+		if(!$result = $this->execLoad())
+			return false;
+		$data = $result->fetchAll(PDO::FETCH_OBJ);
+		$result->closeCursor();
 		return $data;
 	}
 
 	/**
 	 * Function load one row
+	 *
+	 * @return Object
 	 */
-	public function single($opt = array()) {
-		if(!$opt) {
-			if(!$result = $this->execLoad())
-				return false;
-		}
-		else {
-			if(!$result = $this->execLoad($opt))
-				return false;
-		}
-		$data = $result->fetch(PDO::FETCH_OBJ); //object
-		$result->closeCursor(); // Frees up the connection to the server
+	public function single($sql) {
+		$this->setQuery($sql);
+		if(!$result = $this->execLoad())
+			return false;
+		$data = $result->fetch(PDO::FETCH_OBJ);
+		$result->closeCursor();
 		return $data;
 	}
 
 	/**
 	 * Function load data of one column
+	 *
+	 * @return Array
 	 */
-	public function column($opt = array()) {
-		if(!$opt) {
-			if(!$result = $this->execLoad())
-				return false;
-		}
-		else {
-			if(!$result = $this->execLoad($opt))
-				return false;
-		}
-		$data = $result->fetchAll(PDO::FETCH_NUM); //array
-		$result->closeCursor(); // Frees up the connection to the server
-
+	public function column($sql) {
+		$this->setQuery($sql);
+		if(!$result = $this->execLoad())
+			return false;
+		$data = $result->fetchAll(PDO::FETCH_NUM);
+		$result->closeCursor();
 		$col = null;
 		foreach ($data as $cells) {
 			$col[] = $cells[0];
@@ -159,18 +136,15 @@ class pdodb {
 
 	/**
 	 * Function count the records of table
+	 *
+	 * @return result[0][0]
 	 */
-	public function count($opt = array()) {
-		if(!$opt) {
-			if(!$result = $this->execLoad())
-				return false;
-		}
-		else {
-			if(!$result = $this->execLoad($opt))
-				return false;
-		}
-		$data = $result->fetch(PDO::FETCH_COLUMN); //count (int)
-		$result->closeCursor(); // Frees up the connection to the server
+	public function count($sql) {
+		$this->setQuery($sql);
+		if(!$result = $this->execLoad())
+			return false;
+		$data = $result->fetch(PDO::FETCH_COLUMN);
+		$result->closeCursor();
 		return $data;
 	}
 
@@ -216,7 +190,7 @@ class pdodb {
      * @param  string $sql
      * @return string
      */
-	private function ExceptionLog($message, $sql = "", $para = "")
+	private function ExceptionLog($message, $sql = "")
 	{
 		$e = $message;
 		if (!empty($sql)) {
@@ -225,13 +199,7 @@ class pdodb {
 			$e .= "<br/>Raw SQL : " . $sql;
 		}
 
-		if (!empty($para)) {
-            # Add the Parameter to the Log
-			$message .= "\r\nPara : " . $para;
-			$e .= "<br/>Para : " . $para;
-		}
-
-		$exception = '<b>&#x2622; Exception!</b> Check logs<br />';
+		$exception = '<b>&#x2622; Exception!</b><br />';
 		$exception .= $e;
 
         # Write into log
@@ -241,28 +209,18 @@ class pdodb {
 	}
 }
 
-/*==Example of Transaction==
+/*
+# Example of Transaction
 $pdo = new pdodb();
 $pdo->beginTransaction();
 try
 {
-	$sql = "insert into user values(?,?,?,?)";
-	$pdo->setQuery($sql);
-	$pdo->execute(array(null,1,1,2));
-	$sql2 = "insert into user values(?,?,?,?)";
-	$pdo->setQuery($sql);
-	$pdo->execute(array(null,1,1,'aa')); //fail
+	#sql...
 	$pdo->commit();
 }
 catch (PDOException $ex)
 {
 	$pdo->rollBack();
-}*/
-
-
-/*$pdo = new pdodb();
-$sql = "select * from user where id = ?";
-$pdo->setQuery($sql);
-echo '<pre>';
-print_r($pdo->single(array(1)));*/
+}
+*/
 ?>

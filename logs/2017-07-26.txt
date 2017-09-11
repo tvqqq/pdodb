@@ -1,0 +1,15 @@
+Time: 10:09:36
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , CURRENT_TIMESTAMP)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, 'q', , , CURRENT_TIMESTAMP)
+-----
+Time: 10:08:50
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , CURRENT_TIMESTAMP)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , CURRENT_TIMESTAMP)
+-----
+Time: 10:08:28
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , CURRENT_TIMESTAMP)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , CURRENT_TIMESTAMP)
+-----
+Time: 10:08:21
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' , CURRENT_TIMESTAMP)' at line 1
+Raw SQL : INSERT INTO `products` VALUES (null, '', , , CURRENT_TIMESTAMP)

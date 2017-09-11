@@ -1,0 +1,38 @@
+Time: 14:35:23
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delete from abc where 1 = 1' at line 1
+Raw SQL : SELECT COUNT(*) FROM user where id = 1; delete from abc where 1 = 1
+-----
+Time: 14:33:41
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into abc values(333)' at line 1
+Raw SQL : SELECT COUNT(*) FROM user where id = 1; insert into abc values(333)
+-----
+Time: 14:32:06
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'drop database php-mvc-pure-db' at line 1
+Raw SQL : SELECT COUNT(*) FROM user where id = 1; drop database php-mvc-pure-db
+-----
+Time: 14:31:46
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'truncate table user' at line 1
+Raw SQL : SELECT COUNT(*) FROM user where id = 1; truncate table user
+-----
+Time: 13:46:24
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table user' at line 1
+Raw SQL : SELECT COUNT(*) FROM user where id = 1 & truncate table user
+-----
+Time: 13:45:37
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT COUNT(*) FROM user where id =
+-----
+Time: 10:33:04
+could not find driver
+-----
+Time: 10:33:03
+could not find driver
+-----
+Time: 10:30:50
+could not find driver
+-----
+Time: 10:21:55
+could not find driver
+-----
+Time: 10:20:21
+could not find driver

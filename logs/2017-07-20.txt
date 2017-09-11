@@ -1,0 +1,8 @@
+Time: 17:16:57
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'quyen' in 'where clause'
+Raw SQL : SELECT password FROM user WHERE username = quyen
+Para : quyen
+-----
+Time: 17:16:06
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'quyen' in 'where clause'
+Raw SQL : SELECT password FROM user WHERE username = quyen
